@@ -22,10 +22,12 @@ abstract class CentroDeDistribucion {
     fun puedeCubrir(unaCiudad:Ciudad): Boolean {
         return trabajaCon.any { vendedor: Vendedor -> vendedor.puedeTrabajarEn(unaCiudad) }
     }
-    fun vendedoresGenericos(){
-        return trabajaCon.map({vendedor => vendedor.certificacionesComunes() >= 1})
+    fun vendedoresGenericos(): Boolean {
+        return trabajaCon.all { vendedor: Vendedor -> vendedor.otrasCertificaciones() >= 1 }
     }
-
+    fun esRobusto(): Boolean{
+        return trabajaCon.count {vendedor: Vendedor -> vendedor.esFirme()} >= 3
+    }
 
 }
 
