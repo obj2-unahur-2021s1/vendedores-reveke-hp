@@ -42,7 +42,7 @@ class Viajante(private val provinciasHabilitadas: List<Provincia>) : Vendedor() 
 
 
 class ComercioCorresponsal(private var ciudades: List<Provincia>) : Vendedor() {
-  val tieneSucursalEn = mutableListOf<Ciudad1>()
+  private val tieneSucursalEn = mutableListOf<Ciudad1>()
   override fun puedeTrabajarEn(ciudad: Ciudad1): Boolean {
     return tieneSucursalEn.contains(ciudad)
   }

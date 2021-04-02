@@ -1,20 +1,16 @@
 package ar.edu.unahur.obj2.vendedores
 
 
-abstract class CentroDeDistribucion {
-    val estaEnLaCiudadDe: Ciudad = TODO()
+class CentroDeDistribution(val estaEnLaCiudadDe: Ciudad) {
     val trabajaCon = mutableListOf<Vendedor>()
-
     fun agregarTrabajador(unVendedor: Vendedor) {
         trabajaCon.add(unVendedor)
     }
 
     fun sacarTrabajador(unVendedor: Vendedor) {
         if (trabajaCon.contains(unVendedor)) trabajaCon.remove(unVendedor)
-        else this.error("No era empleado")
+        else throw Exception("No era empleado")
     }
-
-    abstract fun error(s: String)
 
     fun vendedorEstrella(): Vendedor? {
         return trabajaCon.maxBy { vendedor: Vendedor -> vendedor.puntajeCertificaciones() }

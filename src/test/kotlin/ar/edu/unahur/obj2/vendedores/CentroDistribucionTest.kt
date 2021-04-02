@@ -3,10 +3,10 @@ package ar.edu.unahur.obj2.vendedores
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
 
-
-
-class CentroDistribucion : DescribeSpec({
+class CentroDePruebas: DescribeSpec({
   val misiones = Provincia(1300000)
   val sanIgnacio = Ciudad(misiones)
   val obera = Ciudad(misiones)
@@ -14,28 +14,26 @@ class CentroDistribucion : DescribeSpec({
   val cordoba = Provincia(2000000)
   val villaDolores = Ciudad(cordoba)
   val viajante = Viajante(listOf(misiones))
+  val central = CentroDeDistribution(sanIgnacio)
+  central.agregarTrabajador(viajante)
+  central.agregarTrabajador(vendedorFijo)
 
-  describe("centralita") {
-    var central = CentroDeDistribucion()
-    central.agregarTrabajador(vendedorFijo)
-    central.agregarTrabajador(viajante)
-
-    describe("Pruebas"){
-      it("esRobusto"){
-        central.esRobusto().shouldBeFalse()
-      }
-      it("puedeCubrir"){
-        central.puedeCubrir(misiones).shouldBeTrue()
-      }
-      it("coleccionVendedores"){
-        
-      }
-
-
+  describe("Pruebas"){
+    it("esRobusto"){
+      central.esRobusto().shouldBeFalse()
     }
-
+    it("puedeCubrir"){
+      central.puedeCubrir(sanIgnacio).shouldBeTrue()
+    }
+    it("coleccionVendedores"){
+      central.vendedoresGenericos().shouldNotBe(viajante)
+    }
+    it("vendedorEstrella"){
+      central.vendedorEstrella().shouldNotBe(vendedorFijo)
+    }
   }
 
 })
+
 
 
