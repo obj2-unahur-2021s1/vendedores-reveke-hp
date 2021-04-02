@@ -2,6 +2,8 @@ package ar.edu.unahur.obj2.vendedores
 
 import ar.edu.unahur.obj2.vendedores.Ciudad as Ciudad1
 
+
+
 class Certificacion(val esDeProducto: Boolean, val puntaje: Int)
 
 abstract class Vendedor {
@@ -39,10 +41,10 @@ class Viajante(private val provinciasHabilitadas: List<Provincia>) : Vendedor() 
 }
 
 
-class ComercioCorresponsal(private val ciudades: List<Ciudad1>) : Vendedor() {
+class ComercioCorresponsal(private var ciudades: List<Provincia>) : Vendedor() {
   val tieneSucursalEn = mutableListOf<Ciudad1>()
   override fun puedeTrabajarEn(ciudad: Ciudad1): Boolean {
-    return ciudades.contains(ciudad)
+    return tieneSucursalEn.contains(ciudad)
   }
   fun agregarSucursal(unaCiudad: Ciudad1){
     tieneSucursalEn.add(unaCiudad)

@@ -36,4 +36,24 @@ class VendedorTest : DescribeSpec({
       }
     }
   }
+  describe("comercioCorresponsal") {
+    val buenosAires = Provincia(100000)
+    val hurlingham = Ciudad(buenosAires)
+    val comercio = ComercioCorresponsal(listOf(buenosAires))
+    comercio.agregarSucursal(hurlingham)
+
+    describe("puedeTrabajarEn") {
+      it("puede trabajar en una ciudad") {
+        comercio.puedeTrabajarEn(hurlingham).shouldBeTrue()
+      }
+      it("es vertasil") {
+        comercio.esVersatil().shouldBeFalse()
+      }
+      it("es firme") {
+        comercio.esFirme().shouldBeFalse()
+      }
+    }
+  }
 })
+
+
