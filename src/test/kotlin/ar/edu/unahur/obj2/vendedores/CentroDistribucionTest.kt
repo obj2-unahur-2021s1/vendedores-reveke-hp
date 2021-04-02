@@ -5,19 +5,34 @@ import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
 
 
+
 class CentroDistribucion : DescribeSpec({
   val misiones = Provincia(1300000)
   val sanIgnacio = Ciudad(misiones)
+  val obera = Ciudad(misiones)
+  val vendedorFijo = VendedorFijo(obera)
+  val cordoba = Provincia(2000000)
+  val villaDolores = Ciudad(cordoba)
+  val viajante = Viajante(listOf(misiones))
 
   describe("centralita") {
-    val obera = Ciudad(misiones)
-    val central = CentroDeDistribucion()
+    var central = CentroDeDistribucion()
+    central.agregarTrabajador(vendedorFijo)
+    central.agregarTrabajador(viajante)
 
-    describe("vendedor Estrella") {
-      it("su ciudad de origen") {
-        central.vendedorEstrella().shouldBeTrue()
-        central.vendedorEstrella().assertEquals(obrera)
+    describe("Pruebas"){
+      it("esRobusto"){
+        central.esRobusto().shouldBeFalse()
       }
+      it("puedeCubrir"){
+        central.puedeCubrir(misiones).shouldBeTrue()
+      }
+      it("coleccionVendedores"){
+        
+      }
+
+
+    }
 
   }
 
