@@ -19,6 +19,9 @@ class VendedorTest : DescribeSpec({
       it("otra ciudad") {
         vendedorFijo.puedeTrabajarEn(sanIgnacio).shouldBeFalse()
       }
+      it("es influyente"){
+        vendedorFijo.esInfluyente().shouldBeFalse()
+      }
     }
   }
 
@@ -34,6 +37,32 @@ class VendedorTest : DescribeSpec({
       it("una ciudad que no pertenece a una provincia habilitada") {
         viajante.puedeTrabajarEn(villaDolores).shouldBeFalse()
       }
+      it("es influyente"){
+        viajante.esInfluyente().shouldBeFalse()
+      }
+    }
+  }
+  describe("comercioCorresponsal") {
+    val buenosAires = Provincia(100000)
+    val hurlingham = Ciudad(buenosAires)
+    val comercio = ComercioCorresponsal(listOf(buenosAires))
+    comercio.agregarSucursal(hurlingham)
+
+    describe("puedeTrabajarEn") {
+      it("puede trabajar en una ciudad") {
+        comercio.puedeTrabajarEn(hurlingham).shouldBeTrue()
+      }
+      it("es vertasil") {
+        comercio.esVersatil().shouldBeFalse()
+      }
+      it("es firme") {
+        comercio.esFirme().shouldBeFalse()
+      }
+      it("es influyente"){
+        comercio.esInfluyente().shouldBeFalse()
+      }
     }
   }
 })
+
+
